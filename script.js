@@ -1,7 +1,7 @@
 (async () => {
   // Function to fetch movie details from OMDB API
   async function fetchMovieDetails(movieId) {
-    const apiKey = "da76dc6a"; // Your OMDB API key
+    const apiKey = process.env.OMDB_API_KEY;
     const url = `https://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`;
 
     try {
