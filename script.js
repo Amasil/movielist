@@ -22,17 +22,15 @@
       return null;
     }
 
-    const card = document.createElement("a"); // Change to an anchor element
+    const card = document.createElement("div");
     card.classList.add("movie-card");
-    card.href = `https://www.imdb.com/title/${movieId}/`; // IMDb URL
-    card.target = "_blank"; // Open in a new tab
-    // Inside createMovieCard function
+
     card.innerHTML = `
-    <img src="${movieData.Poster}" alt="${movieData.Title}">
-    <h2 class="title">${movieData.Title} (${movieData.Year})</h2>
-    <p class="genre">${movieData.Genre}</p>
-    <p class="synopsis">${movieData.Plot}</p>
-`;
+      <img src="${movieData.Poster}" alt="${movieData.Title}">
+      <h2 class="title">${movieData.Title} (${movieData.Year})</h2>
+      <p class="genre">${movieData.Genre}</p>
+      <p class="synopsis">${movieData.Plot}</p>
+    `;
 
     return card;
   }
@@ -60,12 +58,59 @@
     "tt0316654",
     "tt6751668",
     "tt2948372",
+    // ... (other movie IDs)
   ]; // IMDb IDs for movies
 
+  const genreButtonContainer = document.createElement("div");
+  genreButtonContainer.id = "genre-buttons";
+  movieList.appendChild(genreButtonContainer);
+
+  const allMovieCards = [];
   for (const movieId of movieIds) {
     const movieCard = await createMovieCard(movieId);
     if (movieCard) {
+      allMovieCards.push(movieCard);
       movieList.appendChild(movieCard);
     }
+  }
+
+  const genres = new Set();
+  allMovieCards.forEach((movieCard) => {
+    const genre = movieCard.querySelector(".genre").textContent;
+    const movieGenres = genre.split(",").map((genre) => genre.trim());
+    movieGenres.forEach((genre) => genres.add(genre));
+  });
+
+  const genreSelect = document.createElement("select");
+  genreSelect.id = "genre-select";
+  genreSelect.addEventListener("change", () => {
+    const selectedGenre = genreSelect.value;
+    filterMoviesByGenre(selectedGenre);
+  });
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "all";
+  defaultOption.textContent = "All Genres";
+  genreSelect.appendChild(defaultOption);
+
+  genres.forEach((genre) => {
+    const option = document.createElement("option");
+    option.value = genre;
+    option.textContent = genre;
+    genreSelect.appendChild(option);
+  });
+
+  genreButtonContainer.appendChild(genreSelect);
+
+  function filterMoviesByGenre(selectedGenre) {
+    allMovieCards.forEach((movieCard) => {
+      const genre = movieCard.querySelector(".genre").textContent;
+      const movieGenres = genre.split(",").map((genre) => genre.trim());
+      if (selectedGenre === "all" || movieGenres.includes(selectedGenre)) {
+        movieCard.style.display = "block";
+      } else {
+        movieCard.style.display = "none";
+      }
+    });
   }
 })();

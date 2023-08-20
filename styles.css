@@ -82,3 +82,17 @@ a {
   transform: translate(0, -5px); /* Move the card up slightly */
   transition: transform 0.2s, box-shadow 0.2s; /* Add transitions for smooth effect */
 }
+#genre-buttons {
+  margin: 20px 0;
+}
+
+#genre-buttons button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f4f4f4;
+}
+
+
