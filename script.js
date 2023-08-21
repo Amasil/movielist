@@ -74,6 +74,10 @@
     if (movieCard) {
       allMovieCards.push(movieCard);
       movieList.appendChild(movieCard);
+      // Add a click event listener to each movie card
+      movieCard.addEventListener("click", () => {
+        openIMDbPage(movieId); // Open the IMDb page for the clicked movie
+      });
     }
   }
 
