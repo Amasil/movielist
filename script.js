@@ -65,8 +65,8 @@
     "tt2948372",
   ]; // IMDb IDs for movies
 
-  const genreButtonContainer = document.getElementById("genre-buttons");
-  let selectedGenre = "all"; // Keep track of the selected genre
+  const genreDropdown = document.getElementById("genre-dropdown");
+  let selectedGenre = "all"; // Track the selected genre
 
   const allMovieCards = [];
   for (const movieId of movieIds) {
@@ -74,23 +74,10 @@
     if (movieCard) {
       allMovieCards.push(movieCard);
       movieList.appendChild(movieCard);
-      // Add a click event listener to each movie card
-      movieCard.addEventListener("click", () => {
-        openIMDbPage(movieId); // Open the IMDb page for the clicked movie
-      });
     }
   }
 
-  // Add "All" button to clear filters
-  const allButton = document.createElement("button");
-  allButton.textContent = "All";
-  allButton.addEventListener("click", () => {
-    selectedGenre = "all"; // Update the selected genre
-    filterMoviesByGenre(selectedGenre);
-    highlightSelectedButton(allButton); // Highlight the "All" button and clear others
-  });
-  genreButtonContainer.appendChild(allButton);
-
+  // Create the genre dropdown options
   const genres = new Set();
   allMovieCards.forEach((movieCard) => {
     const genre = movieCard.querySelector(".genre").textContent;
@@ -98,17 +85,25 @@
     movieGenres.forEach((genre) => genres.add(genre));
   });
 
+  // Create the "All Genres" option in the dropdown
+  const allOption = document.createElement("option");
+  allOption.value = "all";
+  allOption.textContent = "All Genres";
+  genreDropdown.appendChild(allOption);
+
+  // Create options for other genres in the dropdown
   genres.forEach((genre) => {
-    const button = document.createElement("button");
-    button.textContent = genre;
-    button.addEventListener("click", () => {
-      selectedGenre = genre; // Update the selected genre
-      filterMoviesByGenre(selectedGenre);
-      highlightSelectedButton(button); // Highlight the selected genre button and clear others
-    });
-    genreButtonContainer.appendChild(button);
+    const option = document.createElement("option");
+    option.value = genre;
+    option.textContent = genre;
+    genreDropdown.appendChild(option);
   });
 
+  // Add change event listener to the genre dropdown
+  genreDropdown.addEventListener("change", (event) => {
+    selectedGenre = event.target.value;
+    filterMoviesByGenre(selectedGenre);
+  });
   // Highlight the selected genre button and clear others
   function highlightSelectedButton(selectedButton) {
     const buttons = genreButtonContainer.querySelectorAll("button");
