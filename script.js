@@ -29,6 +29,7 @@
       <img src="${movieData.Poster}" alt="${movieData.Title}">
       <h2 class="title">${movieData.Title} (${movieData.Year})</h2>
       <p class="genre">${movieData.Genre}</p>
+      <p class="rating">IMDB Rating: ${movieData.imdbRating}</p>
       <p class="synopsis">${movieData.Plot}</p>
     `;
 

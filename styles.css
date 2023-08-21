@@ -60,7 +60,7 @@ a {
 /* Add padding to movie title and synopsis */
 .movie-card h2.title,
 .movie-card p.synopsis,
-.movie-card p.genre {
+.movie-card p.genre, .movie-card p.rating {
   padding: 0 1rem; /* Adjust padding as needed */
 }
 
@@ -84,7 +84,6 @@ a {
   background-color: #f4f4f4;
 }
 
-
 /* Create a flex container for the main content */
 main {
   padding: 2rem;
@@ -93,8 +92,6 @@ main {
   flex-direction: column;
   align-items: center;
 }
-
-
 
 /* Style for the movie list */
 #movie-list {
