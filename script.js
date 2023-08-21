@@ -74,6 +74,10 @@
     if (movieCard) {
       allMovieCards.push(movieCard);
       movieList.appendChild(movieCard);
+      // Add a click event listener to each movie card
+      movieCard.addEventListener("click", () => {
+        openIMDbPage(movieId); // Open the IMDb page for the clicked movie
+      });
     }
   }
 
@@ -113,7 +117,10 @@
     });
     selectedButton.classList.add("selected");
   }
-
+  // Function to open the IMDb page for a movie
+  function openIMDbPage(movieId) {
+    window.open(`https://www.imdb.com/title/${movieId}/`, "_blank");
+  }
   // Filter movies based on the selected genre
   function filterMoviesByGenre(selectedGenre) {
     allMovieCards.forEach((movieCard) => {
