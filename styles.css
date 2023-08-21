@@ -94,11 +94,7 @@ main {
   align-items: center;
 }
 
-/* Genre selector styles */
-#genre-section {
-  text-align: center;
-  margin-bottom: 20px;
-}
+
 
 /* Style for the movie list */
 #movie-list {

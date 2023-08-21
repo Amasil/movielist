@@ -60,9 +60,7 @@
     "tt2948372",
   ]; // IMDb IDs for movies
 
-  const genreButtonContainer = document.getElementById("genre-select");
-  genreButtonContainer.id = "genre-buttons";
-  movieList.appendChild(genreButtonContainer);
+  const genreButtonContainer = document.getElementById("genre-buttons");
 
   const allMovieCards = [];
   for (const movieId of movieIds) {
@@ -73,6 +71,14 @@
     }
   }
 
+  // Add "All" button to clear filters
+  const allButton = document.createElement("button");
+  allButton.textContent = "All";
+  allButton.addEventListener("click", () => {
+    filterMoviesByGenre("all");
+  });
+  genreButtonContainer.appendChild(allButton);
+
   const genres = new Set();
   allMovieCards.forEach((movieCard) => {
     const genre = movieCard.querySelector(".genre").textContent;
@@ -80,26 +86,14 @@
     movieGenres.forEach((genre) => genres.add(genre));
   });
 
-  const genreSelect = document.createElement("select");
-  genreSelect.id = "genre-select";
-  genreSelect.addEventListener("change", () => {
-    const selectedGenre = genreSelect.value;
-    filterMoviesByGenre(selectedGenre);
-  });
-
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "all";
-  defaultOption.textContent = "All Genres";
-  genreSelect.appendChild(defaultOption);
-
   genres.forEach((genre) => {
-    const option = document.createElement("option");
-    option.value = genre;
-    option.textContent = genre;
-    genreSelect.appendChild(option);
+    const button = document.createElement("button");
+    button.textContent = genre;
+    button.addEventListener("click", () => {
+      filterMoviesByGenre(genre);
+    });
+    genreButtonContainer.appendChild(button);
   });
-
-  genreButtonContainer.appendChild(genreSelect);
 
   function filterMoviesByGenre(selectedGenre) {
     allMovieCards.forEach((movieCard) => {
