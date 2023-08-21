@@ -58,10 +58,9 @@
     "tt0316654",
     "tt6751668",
     "tt2948372",
-    // ... (other movie IDs)
   ]; // IMDb IDs for movies
 
-  const genreButtonContainer = document.createElement("div");
+  const genreButtonContainer = document.getElementById("genre-select");
   genreButtonContainer.id = "genre-buttons";
   movieList.appendChild(genreButtonContainer);
 
