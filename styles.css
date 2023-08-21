@@ -108,13 +108,15 @@ main {
 
 #genre-dropdown-container {
   display: flex;
-  flex-direction: column; /* Stack the genre dropdown below the movie list */
   align-items: flex-end; /* Align the dropdown to the right side */
   width: 100%; /* Occupy the entire width */
+  gap: 20px; /* Add spacing between the dropdowns */
   padding: 10px;
 }
 
-#genre-dropdown {
+#genre-dropdown,
+#sort-dropdown {
+  width: 200px;
   font-size: 16px;
   padding: 5px 10px;
   border: 1px solid #ccc;

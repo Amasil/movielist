@@ -132,4 +132,65 @@
       }
     });
   }
+
+  // Sort dropdown functionality
+  const sortDropdown = document.getElementById("sort-dropdown");
+
+  sortDropdown.addEventListener("change", () => {
+    const selectedOption = sortDropdown.value;
+    if (selectedOption === "sort") {
+      // Revert to default sorting here (if you have one)
+      // For example, you can sort by IMDb Highest-Lowest initially.
+      sortMoviesByIMDb("highest");
+    } else {
+      const sortType = selectedOption.split("-")[0];
+      const sortOrder = selectedOption.split("-")[1];
+
+      if (sortType === "imdb") {
+        sortMoviesByIMDb(sortOrder);
+      } else if (sortType === "name") {
+        sortMoviesByName(sortOrder);
+      }
+    }
+  });
+
+  // Sort movies by IMDb rating
+  function sortMoviesByIMDb(order) {
+    allMovieCards.sort((a, b) => {
+      const ratingA = parseFloat(
+        a.querySelector(".rating").textContent.split(":")[1]
+      );
+      const ratingB = parseFloat(
+        b.querySelector(".rating").textContent.split(":")[1]
+      );
+
+      return order === "highest" ? ratingB - ratingA : ratingA - ratingB;
+    });
+
+    updateMovieList();
+  }
+
+  // Sort movies by title
+  function sortMoviesByName(order) {
+    allMovieCards.sort((a, b) => {
+      const titleA = a.querySelector(".title").textContent;
+      const titleB = b.querySelector(".title").textContent;
+
+      if (order === "az") {
+        return titleA.localeCompare(titleB);
+      } else {
+        return titleB.localeCompare(titleA);
+      }
+    });
+
+    updateMovieList();
+  }
+
+  // Update the movie list after sorting
+  function updateMovieList() {
+    movieList.innerHTML = "";
+    allMovieCards.forEach((movieCard) => {
+      movieList.appendChild(movieCard);
+    });
+  }
 })();
