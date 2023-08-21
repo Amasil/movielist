@@ -1,3 +1,4 @@
+// Asynchronous function to set up the movie list and genre filter buttons
 (async () => {
   // Function to fetch movie details from OMDB API
   async function fetchMovieDetails(movieId) {
@@ -5,6 +6,7 @@
     const url = `https://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`;
 
     try {
+      // Fetch movie details from OMDB API
       const response = await fetch(url);
       const data = await response.json();
       return data;
@@ -14,7 +16,7 @@
     }
   }
 
-  // Function to create movie card
+  // Function to create a movie card with details
   async function createMovieCard(movieId) {
     const movieData = await fetchMovieDetails(movieId);
 
@@ -22,9 +24,11 @@
       return null;
     }
 
+    // Create a movie card element
     const card = document.createElement("div");
     card.classList.add("movie-card");
 
+    // Fill in movie card content with fetched data
     card.innerHTML = `
       <img src="${movieData.Poster}" alt="${movieData.Title}">
       <h2 class="title">${movieData.Title} (${movieData.Year})</h2>
@@ -77,7 +81,9 @@
   const allButton = document.createElement("button");
   allButton.textContent = "All";
   allButton.addEventListener("click", () => {
-    filterMoviesByGenre("all");
+    selectedGenre = "all"; // Update the selected genre
+    filterMoviesByGenre(selectedGenre);
+    highlightSelectedButton(allButton); // Highlight the "All" button and clear others
   });
   genreButtonContainer.appendChild(allButton);
 
@@ -92,31 +98,31 @@
     const button = document.createElement("button");
     button.textContent = genre;
     button.addEventListener("click", () => {
-      filterMoviesByGenre(genre);
-      highlightSelectedButton(button); // Call the function to highlight the button
+      selectedGenre = genre; // Update the selected genre
+      filterMoviesByGenre(selectedGenre);
+      highlightSelectedButton(button); // Highlight the selected genre button and clear others
     });
     genreButtonContainer.appendChild(button);
   });
 
-  function highlightSelectedButton(button) {
-    // Remove the highlight class from all buttons
+  // Highlight the selected genre button and clear others
+  function highlightSelectedButton(selectedButton) {
     const buttons = genreButtonContainer.querySelectorAll("button");
-    buttons.forEach((btn) => {
-      btn.classList.remove("selected");
+    buttons.forEach((button) => {
+      button.classList.remove("selected");
     });
-
-    // Add the highlight class to the selected button
-    button.classList.add("selected");
+    selectedButton.classList.add("selected");
   }
 
+  // Filter movies based on the selected genre
   function filterMoviesByGenre(selectedGenre) {
     allMovieCards.forEach((movieCard) => {
       const genre = movieCard.querySelector(".genre").textContent;
       const movieGenres = genre.split(",").map((genre) => genre.trim());
       if (selectedGenre === "all" || movieGenres.includes(selectedGenre)) {
-        movieCard.style.display = "block";
+        movieCard.style.display = "block"; // Show matching movies
       } else {
-        movieCard.style.display = "none";
+        movieCard.style.display = "none"; // Hide non-matching movies
       }
     });
   }
