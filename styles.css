@@ -135,3 +135,7 @@ main {
     align-items: center;
   }
 }
+.selected {
+  background-color: #ff0000; /* Change to your desired highlight color */
+  color: rgb(0, 200, 255);
+}

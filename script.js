@@ -62,6 +62,7 @@
   ]; // IMDb IDs for movies
 
   const genreButtonContainer = document.getElementById("genre-buttons");
+  let selectedGenre = "all"; // Keep track of the selected genre
 
   const allMovieCards = [];
   for (const movieId of movieIds) {
@@ -92,9 +93,21 @@
     button.textContent = genre;
     button.addEventListener("click", () => {
       filterMoviesByGenre(genre);
+      highlightSelectedButton(button); // Call the function to highlight the button
     });
     genreButtonContainer.appendChild(button);
   });
+
+  function highlightSelectedButton(button) {
+    // Remove the highlight class from all buttons
+    const buttons = genreButtonContainer.querySelectorAll("button");
+    buttons.forEach((btn) => {
+      btn.classList.remove("selected");
+    });
+
+    // Add the highlight class to the selected button
+    button.classList.add("selected");
+  }
 
   function filterMoviesByGenre(selectedGenre) {
     allMovieCards.forEach((movieCard) => {
