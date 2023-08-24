@@ -43,7 +43,7 @@
   // Add movie cards to the page
   const movieList = document.getElementById("movie-list");
   const movieIds = [
-    "tt1345836",
+    "tt0468569",
     "tt9362722",
     "tt0482571",
     "tt1130884",
