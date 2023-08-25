@@ -124,3 +124,19 @@ main {
   color: #333;
   vertical-align: top; /* Vertically align the dropdown */
 }
+/* Social media icons */
+.social-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.social-links a {
+  display: inline-block;
+  margin: 0 10px;
+  color: #333;
+  font-size: 16px; /* Adjust font size for the icons */
+  text-decoration: none;
+  vertical-align: middle; /* Vertically align icons */
+  width: 16px; /* Set width to match the width of dropdowns */
+  height: 10px; /* Set height to match the height of dropdowns */
+}
