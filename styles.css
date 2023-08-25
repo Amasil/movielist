@@ -140,3 +140,10 @@ main {
   width: 16px; /* Set width to match the width of dropdowns */
   height: 10px; /* Set height to match the height of dropdowns */
 }
+
+#social-linsk-container {
+  display: flex;
+  flex-direction: row; /* Stack the genre dropdown below the movie list */
+  width: 100%; /* Occupy the entire width */
+  padding: -50px;
+}
