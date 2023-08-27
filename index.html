@@ -11,21 +11,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 
-
 <body>
-    <main>
-        <div class="social-links" id="social-linsk-container">
+    <nav class="navbar">
+        <div class="social-links">
             <a href="https://www.linkedin.com/in/amasilrahim/" class="fa fa-linkedin" target="_blank"></a>
             <a href="https://www.facebook.com/amasil123/" class="fa fa-facebook" target="_blank"></a>
             <a href="https://twitter.com/amasil_r" class="fa fa-twitter" target="_blank"></a>
             <a href="https://www.instagram.com/amasil_r/" class="fa fa-instagram" target="_blank"></a>
             <a href="https://t.snapchat.com/HqTvBluK" class="fa fa-snapchat-ghost" target="_blank"></a>
         </div>
-        <div id="genre-dropdown-container">
-            <select id="genre-dropdown"></select>
+        <div class="nav-dropdowns">
+            <select id="genre-dropdown">
+                <!-- Options for genres -->
+            </select>
             <select id="sort-dropdown">
                 <option value="sort" selected>Sort</option>
                 <option value="imdb-highest">IMDb High-Low</option>
@@ -33,14 +33,14 @@
                 <option value="name-az">Name A-Z</option>
                 <option value="name-za">Name Z-A</option>
             </select>
-
         </div>
+    </nav>
+    <main>
         <div id="movie-list">
             <!-- Movie cards will be appended here -->
         </div>
     </main>
     <script src="script.js"></script>
 </body>
-
 
 </html>
